@@ -13,7 +13,8 @@ TriggerKey    := "o"        ; tap to start / stop the hold (hidden from the game
 HoldKey       := "sc027"    ; key that is held down: the physical ';' key (US/UK layouts)
 LinkKey       := "i"        ; if held when the hold starts, releasing it ends the hold
 IgnoreKeys    := ["j", "l"] ; pressing or releasing these never ends the hold
-CancelButtons := ["LButton", "RButton", "MButton", "XButton1", "XButton2"]
+; LButton is deliberately absent: it is bound to Block, which steers an auto-run.
+CancelButtons := ["RButton", "MButton", "XButton1", "XButton2"]
 Remaps        := Map("9", "LCtrl", "0", "LShift")  ; key => key it acts as; also ends the hold
 PauseKey      := "CapsLock" ; tap to pause / resume everything above (hidden from the game)
 ActiveIn      := ["ahk_exe valheim.exe", "ahk_exe KeyViz.exe"]

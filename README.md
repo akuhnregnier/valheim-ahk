@@ -20,12 +20,18 @@ Ctrl / Shift, and tap `CapsLock` to pause all of that while you type.
 | Tap `O` (or hold it, auto-repeat is ignored) | `;` is pressed and stays held. The game never sees the `O` press. |
 | Tap `O` again | `;` is released. |
 | Press any other key except `J` / `L` | `;` is released. The key you pressed still reaches the game. This includes `9` and `0`. |
-| Left / right / middle / back / forward mouse button | `;` is released. The click still reaches the game. |
+| Right / middle / back / forward mouse button | `;` is released. The click still reaches the game. |
 | Release `I`, if `I` was already held when you tapped `O` | `;` is released. |
 | Valheim loses focus, or the script exits | `;` is released. |
 
-These never release `;`: pressing or releasing `J` / `L`, mouse movement, the scroll wheel, and
-releasing any key other than `I`.
+These never release `;`: pressing or releasing `J` / `L`, the left mouse button, mouse movement,
+the scroll wheel, and releasing any key other than `I`.
+
+The left mouse button is exempt on purpose. `;` is bound to Run, so the hold is a sticky sprint,
+and it is often used together with auto-run. While auto-running, holding Block turns the run
+towards where the camera is looking. Block is on the left mouse button in these bindings
+(Valheim's default is the right button), so steering an auto-run with it must not cancel the
+sprint.
 
 If `I` was *not* held when you tapped `O`, pressing `I` afterwards releases `;` like any other key.
 
@@ -94,7 +100,7 @@ All settings are at the top of `hold-toggle.ahk`:
 | `HoldKey` | `sc027` | Key that is held: the physical `;` key (right of `L`) on US and UK layouts. |
 | `LinkKey` | `i` | If held when the hold starts, releasing it ends the hold. |
 | `IgnoreKeys` | `j`, `l` | Keys that never end the hold. |
-| `CancelButtons` | left, right, middle, back, forward | Mouse buttons that end the hold. |
+| `CancelButtons` | right, middle, back, forward | Mouse buttons that end the hold. The left button is left out, see above. |
 | `Remaps` | `9` → `LCtrl`, `0` → `LShift` | Keys that act as another key. Pressing one also ends the hold. |
 | `PauseKey` | `CapsLock` | Key that pauses / resumes everything above. |
 | `ActiveIn` | Valheim, KeyViz | Windows the script's keys work in. |
