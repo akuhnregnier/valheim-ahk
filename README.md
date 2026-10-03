@@ -10,13 +10,16 @@ AutoHotkey scripts for Valheim.
 
 ## hold-toggle.ahk
 
-Tap `O` to press `;` and keep it held down, hands-free.
+Does two things: tap `O` to press `;` and keep it held down hands-free, and use `9` / `0` as
+Ctrl / Shift.
+
+### Holding `;`
 
 | Input | Effect |
 | --- | --- |
 | Tap `O` (or hold it, auto-repeat is ignored) | `;` is pressed and stays held. The game never sees the `O` press. |
 | Tap `O` again | `;` is released. |
-| Press any other key except `J` / `L` | `;` is released. The key you pressed still reaches the game. |
+| Press any other key except `J` / `L` | `;` is released. The key you pressed still reaches the game. This includes `9` and `0`. |
 | Left / right / middle / back / forward mouse button | `;` is released. The click still reaches the game. |
 | Release `I`, if `I` was already held when you tapped `O` | `;` is released. |
 | Valheim loses focus, or the script exits | `;` is released. |
@@ -25,6 +28,17 @@ These never release `;`: pressing or releasing `J` / `L`, mouse movement, the sc
 releasing any key other than `I`.
 
 If `I` was *not* held when you tapped `O`, pressing `I` afterwards releases `;` like any other key.
+
+### Key remaps
+
+| Key | Acts as |
+| --- | --- |
+| `9` | Left Ctrl |
+| `0` | Left Shift |
+
+The remapped key is held for as long as you hold `9` / `0`, and the game never sees the digit
+itself. If Valheim loses focus while one is held, the Ctrl / Shift is released so it cannot get
+stuck down.
 
 ### Running it
 
@@ -43,8 +57,8 @@ To start it with Windows, press `Win+R`, enter `shell:startup`, and put a shortc
 
 ### Where it is active
 
-`O` is only intercepted while one of the windows listed in `ActiveIn` has focus. Everywhere else
-`O` types normally, and the script does nothing.
+`O`, `9` and `0` are only intercepted while one of the windows listed in `ActiveIn` has focus.
+Everywhere else they type normally, and the script does nothing.
 
 ```ahk
 ActiveIn := ["ahk_exe valheim.exe", "ahk_exe KeyViz.exe"]
@@ -66,7 +80,8 @@ All settings are at the top of `hold-toggle.ahk`:
 | `LinkKey` | `i` | If held when the hold starts, releasing it ends the hold. |
 | `IgnoreKeys` | `j`, `l` | Keys that never end the hold. |
 | `CancelButtons` | left, right, middle, back, forward | Mouse buttons that end the hold. |
-| `ActiveIn` | Valheim, KeyViz | Windows the trigger key works in. |
+| `Remaps` | `9` → `LCtrl`, `0` → `LShift` | Keys that act as another key. Pressing one also ends the hold. |
+| `ActiveIn` | Valheim, KeyViz | Windows the script's keys work in. |
 
 ### Compiling (optional)
 
@@ -94,8 +109,8 @@ events. The script sends one plain key-down and one key-up event with `SendEvent
 `{Blind}`, including the key's scan code, which is the same method AutoHotkey's built-in key
 remapping uses. `SendPlay`, `ControlSend`, `DllCall` tricks or artificial delays are not needed.
 
-**Typing in game.** While the script is active, `O` cannot be typed in Valheim's chat, console,
-signs or portal names. Suspend it first from the tray icon (**Suspend Hotkeys**), or add a
+**Typing in game.** While the script is active, `O`, `9` and `0` cannot be typed in Valheim's
+chat, console, signs or portal names. Suspend it first from the tray icon (**Suspend Hotkeys**), or add a
 suspend key to the script:
 
 ```ahk
