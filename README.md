@@ -8,6 +8,41 @@ AutoHotkey scripts for Valheim.
 - Nothing else. No admin rights and no compiling are needed for a normal Steam install
   (see [Compatibility notes](#compatibility-notes)).
 
+## Keymap
+
+The Valheim bindings these scripts are built around: the right-hand side of a UK keyboard, plus
+the mouse. Keys are coloured by the finger that presses them.
+
+![Valheim keymap: right-hand keyboard section and mouse](keymap.svg)
+
+The diagram is generated from [keymap.json](keymap.json) and is git-ignored rather than committed.
+It therefore shows above only once you have generated it locally, and never on GitHub.
+
+To create it, and to regenerate it whenever `keymap.json` changes, run this from the repository
+folder:
+
+```bash
+powershell -ExecutionPolicy Bypass -File make-keymap-diagram.ps1
+```
+
+This writes `keymap.svg` next to the script. It needs nothing beyond the PowerShell that ships
+with Windows.
+
+`keymap.json` is documentation only. Editing it changes the diagram, but not the bindings in
+Valheim (set those in the game's controls menu) and not what `hold-toggle.ahk` does (see its
+[Configuration](#configuration)).
+
+| Section of `keymap.json` | What it controls in the diagram |
+| --- | --- |
+| `keyboard` | Each key's name, its `actions`, its `style`, and the markers `sub`, `home_key` and `os_remap_marker`. |
+| `mouse` | The actions and `mode` of each mouse button. |
+| `styles` | The colour of each finger or category, and whether its border is dashed. |
+| `geometry` | The position and size of the key rows, space bar, mouse, legend and note. |
+| `legend`, `note` | Which styles the legend lists, and the line of text at the bottom. |
+
+The colour names a style may use are `teal`, `purple`, `coral`, `pink`, `amber`, `blue`, `gray`
+and `neutral`; their values are defined at the top of `make-keymap-diagram.ps1`.
+
 ## hold-toggle.ahk
 
 Does three things: tap `O` to press `;` and keep it held down hands-free, use `9` / `0` as
