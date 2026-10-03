@@ -66,18 +66,7 @@
     "right":       { "style": "mouse",  "actions": ["Attack"], "mode": "hold" },
     "wheel_click": { "style": "mouse",  "actions": ["Alt attack", "Deconstruct"] },
     "forward":     { "style": "mouse",  "actions": ["Build menu"], "mode": "tap" },
-    "back":        { "style": "unused", "actions": [], "label": "unbound" }
-  },
-  "os_remaps": {
-    "scope": "Valheim window only",
-    "purpose": "inventory clicks",
-    "mappings": [
-      { "from": "9", "to": "LCtrl" },
-      { "from": "0", "to": "LShift" }
-    ],
-    "marked_unspecified": [
-      { "key": "O", "note": "OS remap marker shown; target not yet defined" }
-    ]
+    "back":        { "style": "unused", "label": "unbound" }
   },
   "legend": ["index", "middle", "ring", "pinky", "thumb", "mouse", "os_remap", "unused"],
   "note": "OS remaps (Valheim window only, for inventory clicks): 9 sends Left Ctrl, 0 sends Left Shift"
