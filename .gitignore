@@ -1,0 +1,21 @@
+# Compiled scripts
+*.exe
+
+# Backups created by editors / Ahk2Exe
+*.bak
+*.ahk~
+*.tmp
+
+# Logs and local config
+*.log
+*.ini
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editors
+.vscode/
+.idea/
+*.swp
