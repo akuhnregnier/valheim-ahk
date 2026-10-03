@@ -15,17 +15,15 @@ the mouse. Keys are coloured by the finger that presses them.
 
 ![Valheim keymap: right-hand keyboard section and mouse](keymap.svg)
 
-The diagram is generated from [keymap.json](keymap.json) and is git-ignored rather than committed.
-It therefore shows above only once you have generated it locally, and never on GitHub.
-
-To create it, and to regenerate it whenever `keymap.json` changes, run this from the repository
-folder:
+The diagram is generated from [keymap.json](keymap.json) and committed alongside it, so it also
+shows on GitHub. It does not update itself: whenever `keymap.json` changes, regenerate it by
+running this from the repository folder, then commit both files together:
 
 ```bash
 powershell -ExecutionPolicy Bypass -File make-keymap-diagram.ps1
 ```
 
-This writes `keymap.svg` next to the script. It needs nothing beyond the PowerShell that ships
+This overwrites `keymap.svg` next to the script. It needs nothing beyond the PowerShell that ships
 with Windows.
 
 `keymap.json` is documentation only. Editing it changes the diagram, but not the bindings in
