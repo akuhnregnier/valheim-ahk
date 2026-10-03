@@ -2,7 +2,8 @@
 #SingleInstance Force
 
 ; Tap O to hold ';' down until another key or mouse button is pressed.
-; Also remaps 9 to Ctrl and 0 to Shift. See README.md for the full behaviour.
+; Also remaps 9 to Ctrl and 0 to Shift. CapsLock pauses and resumes all of it, so
+; that those keys can be typed. See README.md for the full behaviour.
 ;
 ; Needs no admin rights and no special send API for a normal Steam install of
 ; Valheim. It only has to run as administrator if the game itself does.
@@ -14,6 +15,7 @@ LinkKey       := "i"        ; if held when the hold starts, releasing it ends th
 IgnoreKeys    := ["j", "l"] ; pressing or releasing these never ends the hold
 CancelButtons := ["LButton", "RButton", "MButton", "XButton1", "XButton2"]
 Remaps        := Map("9", "LCtrl", "0", "LShift")  ; key => key it acts as; also ends the hold
+PauseKey      := "CapsLock" ; tap to pause / resume everything above (hidden from the game)
 ActiveIn      := ["ahk_exe valheim.exe", "ahk_exe KeyViz.exe"]
 
 ; --- Performance --------------------------------------------------------------
@@ -48,6 +50,7 @@ for from, to in Remaps {
     Hotkey "*" from, OnRemapDown.Bind(to)
     Hotkey "*" from " up", OnRemapUp.Bind(to)
 }
+Hotkey "*" PauseKey, OnPauseKey, "S"    ; S = keeps working while suspended
 HotIfWinActive
 
 ; Only enabled during a hold, so the mouse hook is not installed the rest of the time.
@@ -128,6 +131,13 @@ ReleaseRemaps() {
     for to in remapHeld
         SendEvent "{Blind}{" to " up}"
     remapHeld.Clear()
+}
+
+OnPauseKey(*) {
+    StopHold()
+    ReleaseRemaps()
+    Suspend -1              ; toggle every hotkey except this one
+    KeyWait PauseKey        ; swallow auto-repeat until the key is physically released
 }
 
 OnForegroundChange(*) {

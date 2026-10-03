@@ -10,8 +10,8 @@ AutoHotkey scripts for Valheim.
 
 ## hold-toggle.ahk
 
-Does two things: tap `O` to press `;` and keep it held down hands-free, and use `9` / `0` as
-Ctrl / Shift.
+Does three things: tap `O` to press `;` and keep it held down hands-free, use `9` / `0` as
+Ctrl / Shift, and tap `CapsLock` to pause all of that while you type.
 
 ### Holding `;`
 
@@ -40,6 +40,21 @@ The remapped key is held for as long as you hold `9` / `0`, and the game never s
 itself. If Valheim loses focus while one is held, the Ctrl / Shift is released so it cannot get
 stuck down.
 
+### Pausing to type
+
+Because the script hides `O`, `9` and `0` from the game, they cannot be typed in Valheim's chat,
+console, signs or portal names while it is active. `CapsLock` is the escape key for that:
+
+- Tap `CapsLock` to pause the script. `O`, `9` and `0` then behave as ordinary keys.
+- Tap `CapsLock` again to resume.
+
+Pausing releases `;`, Ctrl and Shift if the script was holding them. The script stays paused
+until you tap `CapsLock` again, including after switching to another window and back. The tray
+icon shows an **S** while paused; there is no other indication.
+
+Inside Valheim and KeyViz, `CapsLock` no longer turns capital letters on or off, so typing while
+paused is not in capitals. In every other application `CapsLock` works as usual.
+
 ### Running it
 
 Double-click `hold-toggle.ahk`, or from a terminal:
@@ -57,8 +72,8 @@ To start it with Windows, press `Win+R`, enter `shell:startup`, and put a shortc
 
 ### Where it is active
 
-`O`, `9` and `0` are only intercepted while one of the windows listed in `ActiveIn` has focus.
-Everywhere else they type normally, and the script does nothing.
+`O`, `9`, `0` and `CapsLock` are only intercepted while one of the windows listed in `ActiveIn`
+has focus. Everywhere else they behave normally, and the script does nothing.
 
 ```ahk
 ActiveIn := ["ahk_exe valheim.exe", "ahk_exe KeyViz.exe"]
@@ -81,6 +96,7 @@ All settings are at the top of `hold-toggle.ahk`:
 | `IgnoreKeys` | `j`, `l` | Keys that never end the hold. |
 | `CancelButtons` | left, right, middle, back, forward | Mouse buttons that end the hold. |
 | `Remaps` | `9` → `LCtrl`, `0` → `LShift` | Keys that act as another key. Pressing one also ends the hold. |
+| `PauseKey` | `CapsLock` | Key that pauses / resumes everything above. |
 | `ActiveIn` | Valheim, KeyViz | Windows the script's keys work in. |
 
 ### Compiling (optional)
@@ -109,22 +125,15 @@ events. The script sends one plain key-down and one key-up event with `SendEvent
 `{Blind}`, including the key's scan code, which is the same method AutoHotkey's built-in key
 remapping uses. `SendPlay`, `ControlSend`, `DllCall` tricks or artificial delays are not needed.
 
-**Typing in game.** While the script is active, `O`, `9` and `0` cannot be typed in Valheim's
-chat, console, signs or portal names. Suspend it first from the tray icon (**Suspend Hotkeys**), or add a
-suspend key to the script:
-
-```ahk
-#SuspendExempt
-F8::Suspend
-#SuspendExempt false
-```
+**Typing in game.** Tap `CapsLock` first; see [Pausing to type](#pausing-to-type).
 
 **Other AutoHotkey scripts.** Keys sent by AutoHotkey scripts, including this one, are ignored
 when deciding whether to release `;`. Only real key presses count.
 
 **If `;` does not register in game:**
 
-1. Check the script is running (tray icon) and that Valheim has focus.
+1. Check the script is running (tray icon) and that Valheim has focus. If the tray icon shows an
+   **S**, the script is paused: tap `CapsLock`.
 2. Check whether the game is elevated (see above).
 3. Check the binding in Valheim's controls menu is the key right of `L`. On other keyboard
    layouts, change `HoldKey` to the key's name or scan code.
